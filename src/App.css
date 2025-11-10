@@ -1,0 +1,99 @@
+/* src/App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: var(--container-width);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--header-color);
+  margin: 0;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+.score-container .label {
+  font-size: 14px;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.score-container .score {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  line-height: 1;
+}
+
+/* This is our game container. We'll make it rounded. */
+#game-container {
+  width: 100%;
+  /* This creates the responsive square */
+  aspect-ratio: 1 / 1; 
+  max-width: var(--container-width);
+  max-height: var(--container-width);
+  border-radius: 8px;
+  overflow: hidden; /* This clips the canvas to the rounded corners */
+}
+
+/* Make the canvas inside fill its container */
+#game-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.new-game-button {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #8f7a66;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-game-button:hover {
+  background-color: #9f8b77;
+}
+
+.instructions {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Simple media query for small screens */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 36px;
+  }
+}

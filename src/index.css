@@ -1,0 +1,28 @@
+/* src/index.css */
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --header-color: #efefef;
+  --container-width: 480px; /* This matches our game width */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  box-sizing: border-box; /* Important for responsive layout */
+}

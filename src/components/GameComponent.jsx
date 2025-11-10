@@ -1,48 +1,45 @@
+// src/components/GameComponent.jsx
 import React, { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { MainScene } from '../phaser/MainScene';
 
-const GameComponent = () => {
-    // This 'ref' will point to the div element where our game will live
+// 1. We still receive the emitter as a prop
+const GameComponent = ({ emitter }) => {
     const gameContainerRef = useRef(null);
-    
-    // This 'ref' will hold the Phaser game instance
     const gameRef = useRef(null);
 
-    // This useEffect hook runs only ONCE when the component is first mounted
     useEffect(() => {
-        // Do nothing if the game instance already exists
         if (gameRef.current) {
             return;
         }
 
-        // The configuration for our Phaser game
         const config = {
             type: Phaser.AUTO,
             width: 480,
             height: 480,
             backgroundColor: '#bbada0',
-            parent: gameContainerRef.current, // Attach the game to our div
-            scene: [MainScene] // Tell Phaser which scene to load
+            parent: gameContainerRef.current,
+            scene: [MainScene] // Just list the scene
         };
 
-        // Create the new Phaser game instance
+        // Create the game
         gameRef.current = new Phaser.Game(config);
 
-        // This is a "cleanup" function
-        // It runs when the component is unmounted (e.g., changing pages)
+        // 2. (THE FIX) After creating the game,
+        // safely set the emitter in the game's global registry.
+        gameRef.current.registry.set('emitter', emitter);
+
         return () => {
             if (gameRef.current) {
-                gameRef.current.destroy(true); // Destroy the game
+                gameRef.current.destroy(true);
                 gameRef.current = null;
             }
         };
-    }, []); // The empty array [] means "run this effect only once"
+    }, [emitter]); // We add emitter here
 
-    // Render a simple div. Phaser will attach its <canvas> inside this div.
     return (
         <div id="game-container" ref={gameContainerRef}>
-            {/* The game will appear here */}
+            {/* The game canvas will be injected here by Phaser */}
         </div>
     );
 };
